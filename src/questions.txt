@@ -1,0 +1,22 @@
+1. Which of the following will MOST likely adversely impact the operations of unpatched traditional programmable-logic controllers, running a back-end LAMP server and OT systems with human-management interfaces that are accessible over the Internet via a web interface? (Choose two.)
+A. Cross-site scripting
+B. Data exfiltration
+C. Poor system logging
+D. Weak encryption
+E. SQL injection
+F. Server-side request forgery
+Answers: D and F
+
+2. A company recently transitioned to a strictly BYOD culture due to the cost of replacing lost or damaged corporate-owned mobile devices. Which of the following technologies would be BEST to balance the BYOD culture while also protecting the company’s data?
+A. Containerization
+B. Geofencing
+C. Full-disk encryption
+D. Remote wipe
+Answer: A
+
+3. A Chief Security Office's (CSO's) key priorities are to improve preparation, response, and recovery practices to minimize system downtime and enhance organizational resilience to ransomware attacks. Which of the following would BEST meet the CSO's objectives?
+A. Use email-filtering software and centralized account management, patch high-risk systems, and restrict administration privileges on fileshares.
+B. Purchase cyber insurance from a reputable provider to reduce expenses during an incident.
+C. Invest in end-user awareness training to change the long-term culture and behavior of staff and executives, reducing the organization's susceptibility to phishing attacks.
+D. Implement application whitelisting and centralized event-log management, and perform regular testing and validation of full backups.
+Answer: D
