@@ -1,9 +1,9 @@
-from distutils.text_file import TextFile
-import re
+import database
 
 class QuestionExtraction:
     def __init__(self, question_file) -> None:
         self.text_file = question_file
+        self.database_has_a_relationship = database.Questions()
 
     def read_question(self):
         answer = []
@@ -12,8 +12,18 @@ class QuestionExtraction:
         with open(self.text_file) as txt:
             read_lines = txt.readlines()
 
-            if "Answer" in read_lines:
-                txt.split()
+            for item in read_lines:
+                if "Answer" in item:
+                    answer.append(item)
+                else:
+                    question.append(item)
+        print(question)
+        print(answer)
+
+        self.add_question_to_database(question, answer)
+    
+    def add_question_to_database(self, question, answer):
+        pass
 
 def main():
     text_file = "questions.txt"

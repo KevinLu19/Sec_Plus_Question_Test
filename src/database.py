@@ -1,6 +1,5 @@
 import sqlite3
 import sys
-import unittest
 
 class Questions:
     def __init__(self, DATABASE="questions.db"):
@@ -11,8 +10,13 @@ class Questions:
             sys.exit()
 
         self.cursor = DATABASE.cursor()
-        self.cursor.execute("CREATE TABLE IF NOT EXISTS question(id INTEGER, question TEXT, answer TEXT)")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS question(id INTEGER, question TEXT, answer TEXT, explaination TEXT)")
     
-    def add_entry(self, cursor, entry):
-        pass
+    def add_entry(self, entry):
+        
+        if len(entry) < 0:
+            print("Invalid entry.") 
+            sys.exit()
 
+    def print_table(self):
+        return self.cursor.execute("SELECT * FROM question")
