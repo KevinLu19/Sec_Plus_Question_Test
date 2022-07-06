@@ -23,7 +23,7 @@ class QuestionExtraction:
         self.add_question_to_database(question, answer)
     
     def add_question_to_database(self, question, answer):
-        pass
+        self.database_has_a_relationship.add_entry(question, answer)
 
 def main():
     text_file = "questions.txt"
