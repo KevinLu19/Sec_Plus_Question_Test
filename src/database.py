@@ -32,7 +32,7 @@ class Questions:
                 print(tup)
 
     def _drop_table(self):
-        self.cur.execute()
+        self.cur.execute("DROP TABLE questions")
 
 if __name__ == "__main__":
     sample_question = """
