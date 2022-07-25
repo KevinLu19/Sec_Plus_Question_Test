@@ -42,7 +42,8 @@ class TestQuestionExtract(unittest.TestCase):
         # for ans in question_answer_list:
         #     print(ans)
     
-
+    def test_add_question_to_database(self):
+        pass
 
     def test_question_answers(self):
         pass

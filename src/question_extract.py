@@ -1,35 +1,50 @@
 import database
 
+from pathlib import Path
+
+class ImportingQuestion:
+    def __init__(self):
+        self.change_directory = Path(r"../src/questions.txt") 
+
 class QuestionExtraction:
-    def __init__(self, question_file) -> None:
-        self.text_file = question_file
+    def __init__(self) -> None:
+        self._importing_class = ImportingQuestion()
+        self.extracted_question = self._importing_class.change_directory
         self.database_has_a_relationship = database.Questions()
 
     def read_question(self):
-        answer = []
-        question = []
+        answer_list = []
+        question_list = []
 
-        with open(self.text_file) as txt:
-            read_lines = txt.readlines()
-
-            for item in read_lines:
-                if "Answer" in item:
-                    answer.append(item)
+        with open(self.extracted_question) as txt:
+            for question in txt:
+                if "Answer" in question:
+                    answer = question.splitlines()
+                    answer_list.append(answer)
                 else:
-                    question.append(item)
-        print(question)
-        print(answer)
+                    question_list.append(question)
 
-        self.add_question_to_database(question, answer)
+        # print (question_list)
+        # print (answer_list)          
+
+        self.add_question_to_database(question_list, answer_list)
     
-    def add_question_to_database(self, question, answer):
-        self.database_has_a_relationship.add_entry(question, answer)
+    def add_question_to_database(self, question_list, answer_list):
+        for  question in question_list:
+            print (question)
+        
+        for answer in answer_list:
+            print ( answer)
+
+        # self.database_has_a_relationship.add_entry(question, answer)
 
 def main():
-    text_file = "questions.txt"
+    # text_file = "questions.txt"
 
-    question_class = QuestionExtraction(text_file)
-    question_class.read_question()
+    # question_class = QuestionExtraction(text_file)
+    # question_class.read_question()
+    question = QuestionExtraction()
+    question.read_question()
 
 if __name__ == "__main__":
     main()
