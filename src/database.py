@@ -1,6 +1,51 @@
 import sqlite3
 import sys
+import pymongo
+import pprint
 
+class Database:
+    def __init__(self):
+        try:
+            self.mongo_conn = pymongo.MongoClient("mongodb://localhost:27017/")
+            self.mongo_conn.server_info()
+        except pymongo.errors.ServerSelectionTimeoutError as err:
+            print (err)
+
+        self.mongo_database = self.mongo_conn["Security+"]
+        self.mongo_cluster = self.mongo_database["Questions"]
+    
+    def add_entry(self, question, answer):
+        cluster_id = 1
+        post_document = {
+            "id": cluster_id, 
+            "Questions": question, 
+            "Answer": answer}
+        cluster_id = cluster_id + 1
+
+        self.mongo_cluster.insert_one(post_document)
+
+    def query_table(self):
+        data_result = self.mongo_cluster.find({})
+
+        for data in data_result:
+            if self.check_for_duplicate(data) is False:
+                print(data)
+    
+    def query_table_entry(self, item):
+        return self.mongo_cluster.find_one(item)
+
+    def check_for_duplicate(self, question):
+        query_result = self.query_table_entry(question)
+        
+        pprint.pprint(query_result)
+
+        return True if query_result is False else False
+    
+    def update_table_entry(self, item):
+        self.mongo_cluster.delete_one(item)
+
+    def __drop_cluster(self):
+        self.mongo_cluster.drop()
 
 class Questions:
     def __init__(self, DATABASE="questions.db"):
@@ -35,17 +80,34 @@ class Questions:
         self.cur.execute("DROP TABLE questions")
 
 if __name__ == "__main__":
-    sample_question = """
-    1. Which of the following will MOST likely adversely impact the operations of unpatched traditional programmable-logic controllers, running a back-end LAMP server and OT systems with human-management interfaces that are accessible over the Internet via a web interface? (Choose two.)
-A. Cross-site scripting
-B. Data exfiltration
-C. Poor system logging
-D. Weak encryption
-E. SQL injection
-F. Server-side request forgery"""
+#     sample_question = """
+#     1. Which of the following will MOST likely adversely impact the operations of unpatched traditional programmable-logic controllers, running a back-end LAMP server and OT systems with human-management interfaces that are accessible over the Internet via a web interface? (Choose two.)
+# A. Cross-site scripting
+# B. Data exfiltration
+# C. Poor system logging
+# D. Weak encryption
+# E. SQL injection
+# F. Server-side request forgery"""
 
-    sample_question_answer = "Answers: D and F"
+#     sample_question_answer = "Answers: D and F"
 
-    question = Questions()
-    question.add_entry(sample_question, sample_question_answer)
-    question.print_table()
+#     question = Questions()
+#     question.add_entry(sample_question, sample_question_answer)
+#     question.print_table()
+
+##################################
+    # mongo_conn = pymongo.MongoClient("mongodb://localhost:27017/")
+    # mongo_database = mongo_conn["Security+"]
+    # mongo_cluster = mongo_database["Questions"]    
+
+    # mydict = { "name": "John", "address": "Highway 37" }
+
+    # random_insert =  mongo_cluster.insert_one(mydict)
+
+    # print(mongo_conn.server_info())
+
+    database = Database()
+    #database.query_table()
+
+    example_document = {'name': 'John'}
+    database.check_for_duplicate(example_document)
