@@ -3,6 +3,8 @@ import sys
 import pymongo
 import pprint
 
+import pdf_extract
+
 class Database:
     def __init__(self):
         try:
@@ -13,16 +15,27 @@ class Database:
 
         self.mongo_database = self.mongo_conn["Security+"]
         self.mongo_cluster = self.mongo_database["Questions"]
-    
-    def add_entry(self, question, answer):
-        cluster_id = 1
-        post_document = {
-            "id": cluster_id, 
-            "Questions": question, 
-            "Answer": answer}
-        cluster_id = cluster_id + 1
 
-        self.mongo_cluster.insert_one(post_document)
+        self.pdf_extract_obj = pdf_extract.PdfExtraction()
+    
+    def add_entry(self):
+        # cluster_id = 1
+        # post_document = {
+        #     "id": cluster_id, 
+        #     "Questions": question, 
+        #     "Answer": answer}
+        # cluster_id = cluster_id + 1
+
+        question = self.pdf_extract_obj.read_questions()
+        cluster_id = 1
+
+        post_question_document = {
+            "id" : cluster_id,
+            "Questions" : question,
+        }
+
+        cluster_id = cluster_id + 1
+        self.mongo_cluster.insert_one(post_question_document)
 
     def query_table(self):
         data_result = self.mongo_cluster.find({})
@@ -110,4 +123,4 @@ if __name__ == "__main__":
     #database.query_table()
 
     example_document = {'name': 'John'}
-    database.check_for_duplicate(example_document)
+    database.query_table()

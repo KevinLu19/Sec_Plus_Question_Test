@@ -1,22 +1,33 @@
-1. Which of the following will MOST likely adversely impact the operations of unpatched traditional programmable-logic controllers, running a back-end LAMP server and OT systems with human-management interfaces that are accessible over the Internet via a web interface? (Choose two.)
-A. Cross-site scripting
-B. Data exfiltration
-C. Poor system logging
-D. Weak encryption
-E. SQL injection
-F. Server-side request forgery
-Answers: D and F
-
-2. A company recently transitioned to a strictly BYOD culture due to the cost of replacing lost or damaged corporate-owned mobile devices. Which of the following technologies would be BEST to balance the BYOD culture while also protecting the company’s data?
-A. Containerization
-B. Geofencing
-C. Full-disk encryption
-D. Remote wipe
-Answer: A
-
-3. A Chief Security Office's (CSO's) key priorities are to improve preparation, response, and recovery practices to minimize system downtime and enhance organizational resilience to ransomware attacks. Which of the following would BEST meet the CSO's objectives?
-A. Use email-filtering software and centralized account management, patch high-risk systems, and restrict administration privileges on fileshares.
-B. Purchase cyber insurance from a reputable provider to reduce expenses during an incident.
-C. Invest in end-user awareness training to change the long-term culture and behavior of staff and executives, reducing the organization's susceptibility to phishing attacks.
-D. Implement application whitelisting and centralized event-log management, and perform regular testing and validation of full backups.
-Answer: D
+ 
+137 Licensed to Christi Sanders 
+Question 417
+Which of the following is the MOST secure but LEAST expensive data destruction method for 
+data that is stored on hard drives?
+○ Pulverizing
+○ Shredding
+○ Incinerating
+● Degaussing
+Question 418
+A security analyst is investigating multiple hosts that are communicating to external IP 
+addresses during the hours of 2:00 a.m - 4:00 am. The malware has evaded detection by 
+traditional antivirus software. Which of the following types of malware is MOST likely infecting 
+the hosts?
+○ A RAT
+○ Ransomware
+● Polymophic
+○ A worm
+Question 419
+A company is required to continue using legacy software to support a critical service. Which of
+the following BEST explains a risk of this practice?
+○ Default system configuration
+● Unsecure protocols
+○ Lack of vendor support
+○ Weak encryption
+Question 420
+A security researcher has alerted an organization that its sensitive user data was found for 
+sale on a website. Which of the following should the organization use to inform the affected 
+parties?
+● An incident response plan
+○ A communications plan
+○ A business continuity plan
+○ A disaster recovery plan

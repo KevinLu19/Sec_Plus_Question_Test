@@ -126,7 +126,9 @@ dmypy.json
 
 # .db File extension
 *.db
+questions.db
 
 #.pdf File Extension
 *.pdf
 *.txt
+questions.txt
