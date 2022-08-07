@@ -6,19 +6,24 @@ import pprint
 import pdf_extract
 
 class Database:
-    def __init__(self):
-        try:
-            self.mongo_conn = pymongo.MongoClient("mongodb://localhost:27017/")
-            self.mongo_conn.server_info()
-        except pymongo.errors.ServerSelectionTimeoutError as err:
-            print (err)
+    connection = None   # used to connect to the database once and not per instance.
 
+    def __init__(self):
+        if Database.connection is None:
+            try:
+                self.mongo_conn = pymongo.MongoClient("mongodb://localhost:27017/")
+                self.mongo_conn.server_info()
+
+            except pymongo.errors.ServerSelectionTimeoutError as err:
+                print (err)
+
+        self.connection = Database.connection
         self.mongo_database = self.mongo_conn["Security+"]
         self.mongo_cluster = self.mongo_database["Questions"]
 
-        self.pdf_extract_obj = pdf_extract.PdfExtraction()
+       # self.pdf_extract_obj = pdf_extract.PdfExtraction()
     
-    def add_entry(self):
+    def add_entry(self, questions):
         # cluster_id = 1
         # post_document = {
         #     "id": cluster_id, 
@@ -27,6 +32,9 @@ class Database:
         # cluster_id = cluster_id + 1
 
         question = self.pdf_extract_obj.read_questions()
+
+        print (questions)
+        
         cluster_id = 1
 
         post_question_document = {
@@ -34,8 +42,9 @@ class Database:
             "Questions" : question,
         }
 
+
         cluster_id = cluster_id + 1
-        self.mongo_cluster.insert_one(post_question_document)
+        # self.mongo_cluster.insert_one(post_question_document)
 
     def query_table(self):
         data_result = self.mongo_cluster.find({})
