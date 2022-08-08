@@ -3,8 +3,6 @@ import sys
 import pymongo
 import pprint
 
-import pdf_extract
-
 class Database:
     connection = None   # used to connect to the database once and not per instance.
 
@@ -21,30 +19,18 @@ class Database:
         self.mongo_database = self.mongo_conn["Security+"]
         self.mongo_cluster = self.mongo_database["Questions"]
 
-       # self.pdf_extract_obj = pdf_extract.PdfExtraction()
+        #self.pdf_extract_obj = pdf_extract.PdfExtraction()
     
-    def add_entry(self, questions):
-        # cluster_id = 1
-        # post_document = {
-        #     "id": cluster_id, 
-        #     "Questions": question, 
-        #     "Answer": answer}
-        # cluster_id = cluster_id + 1
-
-        question = self.pdf_extract_obj.read_questions()
-
-        print (questions)
-        
+    def add_entry(self, sec_plus_questions):
         cluster_id = 1
 
         post_question_document = {
             "id" : cluster_id,
-            "Questions" : question,
+            "Questions" : sec_plus_questions,
         }
 
-
         cluster_id = cluster_id + 1
-        # self.mongo_cluster.insert_one(post_question_document)
+        self.mongo_cluster.insert_one(post_question_document)
 
     def query_table(self):
         data_result = self.mongo_cluster.find({})
@@ -129,7 +115,4 @@ if __name__ == "__main__":
     # print(mongo_conn.server_info())
 
     database = Database()
-    #database.query_table()
-
-    example_document = {'name': 'John'}
     database.query_table()

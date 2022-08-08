@@ -3,10 +3,13 @@ import database
 
 
 class PdfExtraction:
+    MONGO_DATABASE = database.Database()
+
     def __init__(self):
         self.pdf_file_object = open("questions.pdf", "rb")
         self.pdf_reader = PyPDF2.PdfFileReader(self.pdf_file_object)
-        self.MONGO_DATABASE = database.Database()
+
+        self.mongo_database = PdfExtraction.MONGO_DATABASE
 
     def read_questions(self):
         for question in range(3, 137):
@@ -14,7 +17,7 @@ class PdfExtraction:
             extracted_questions = page_object.extractText()
 
             self.remove_text_from_pdf(extracted_questions)
-            print (extracted_questions)
+            # print (extracted_questions)
 
         page_object = self.pdf_reader.numPages
 
@@ -22,9 +25,10 @@ class PdfExtraction:
         for removal_text in ["Licensed to Christi Sanders", "clynsanders@outlook.com"]:
             if removal_text in question_bank:
                 questions = question_bank.replace(removal_text, "")
-                # print (questions)
+                print (questions)
                 
-                # self.copy_to_txt_file(questions)
+                self.mongo_database.add_entry(questions)
+                self.copy_to_txt_file(questions)
         
         return questions
 
