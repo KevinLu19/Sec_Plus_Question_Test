@@ -36,13 +36,8 @@ class QuestionExtraction:
         for answer in answer_list:
             print ( answer)
 
-        # self.database_has_a_relationship.add_entry(question, answer)
 
 def main():
-    # text_file = "questions.txt"
-
-    # question_class = QuestionExtraction(text_file)
-    # question_class.read_question()
     question = QuestionExtraction()
     question.read_question()
 

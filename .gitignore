@@ -132,3 +132,5 @@ questions.db
 *.pdf
 *.txt
 questions.txt
+
+src/main.py

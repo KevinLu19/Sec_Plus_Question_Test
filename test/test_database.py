@@ -4,9 +4,6 @@ import sys
 import pprint
 import pymongo
 
-#import src.database as live_database_code
-# from src import database as live_database_code
-
 question = """1. Which of the following will MOST likely adversely impact the operations of unpatched traditional programmable-logic controllers, running a back-end LAMP server and OT systems with human-management interfaces that are accessible over the Internet via a web interface? (Choose two.)
 
 A. Cross-site scripting
@@ -50,9 +47,6 @@ class TestSQL(unittest.TestCase):
         return self.conn.execute(sql_command)
 
     def test_print_table(self):
-        # live_database_class = live_database_code.Questions()
-        # print(live_database_class.print_table())
-        # return self.cur.execute("SELECT * FROM test")
         self.cur.execute("SELECT * FROM test")
         items = self.cur.fetchall()
 
