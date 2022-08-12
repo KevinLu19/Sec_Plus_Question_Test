@@ -11,7 +11,11 @@ Program that Prompts Security Plus Questions taken from Quizlet.
   ```
     pip install PyPDF2
   ```
-  
+
+## Faster Way of Installing Modules
+```
+python setup.py install
+```
 
 ## Installation 
 
